@@ -47,43 +47,53 @@ services:
     startCommand: npm run start:worker
     autoDeploy: true
     envVars:
-      - fromService:
+      - key: DATABASE_URL
+        fromService:
           type: web
           name: fitai-api
           envVarKey: DATABASE_URL
-      - fromService:
+      - key: REDIS_URL
+        fromService:
           type: web
           name: fitai-api
           envVarKey: REDIS_URL
-      - fromService:
+      - key: S3_ENDPOINT
+        fromService:
           type: web
           name: fitai-api
           envVarKey: S3_ENDPOINT
-      - fromService:
+      - key: S3_REGION
+        fromService:
           type: web
           name: fitai-api
           envVarKey: S3_REGION
-      - fromService:
+      - key: S3_BUCKET
+        fromService:
           type: web
           name: fitai-api
           envVarKey: S3_BUCKET
-      - fromService:
+      - key: S3_ACCESS_KEY
+        fromService:
           type: web
           name: fitai-api
           envVarKey: S3_ACCESS_KEY
-      - fromService:
+      - key: S3_SECRET_KEY
+        fromService:
           type: web
           name: fitai-api
           envVarKey: S3_SECRET_KEY
-      - fromService:
+      - key: S3_FORCE_PATH_STYLE
+        fromService:
           type: web
           name: fitai-api
           envVarKey: S3_FORCE_PATH_STYLE
-      - fromService:
+      - key: S3_PUBLIC_URL
+        fromService:
           type: web
           name: fitai-api
           envVarKey: S3_PUBLIC_URL
-      - fromService:
+      - key: AI_PROVIDER
+        fromService:
           type: web
           name: fitai-api
           envVarKey: AI_PROVIDER
