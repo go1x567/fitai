@@ -1,0 +1,89 @@
+services:
+  - type: web
+    name: fitai-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ALLOWED_ORIGINS
+        sync: false
+      - key: DATABASE_URL
+        sync: false
+      - key: REDIS_URL
+        sync: false
+      - key: JWT_SECRET
+        generateValue: true
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_REGION
+        value: auto
+      - key: S3_BUCKET
+        sync: false
+      - key: S3_ACCESS_KEY
+        sync: false
+      - key: S3_SECRET_KEY
+        sync: false
+      - key: S3_FORCE_PATH_STYLE
+        value: "true"
+      - key: S3_PUBLIC_URL
+        sync: false
+      - key: AI_PROVIDER
+        value: stub
+      - key: ADMIN_EMAILS
+        sync: false
+
+  - type: worker
+    name: fitai-worker
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install && npm run build
+    startCommand: npm run start:worker
+    autoDeploy: true
+    envVars:
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: DATABASE_URL
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: REDIS_URL
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: S3_ENDPOINT
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: S3_REGION
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: S3_BUCKET
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: S3_ACCESS_KEY
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: S3_SECRET_KEY
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: S3_FORCE_PATH_STYLE
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: S3_PUBLIC_URL
+      - fromService:
+          type: web
+          name: fitai-api
+          envVarKey: AI_PROVIDER

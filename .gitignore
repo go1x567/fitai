@@ -1,0 +1,27 @@
+node_modules/
+.env
+.env.local
+.env.*.local
+dist/
+build/
+.cache/
+.vite/
+*.log
+tunnel.log
+tunnel.err.log
+pinggy.log
+pinggy.err
+serveo.log
+serveo.err
+cloudflared.exe
+.DS_Store
+Thumbs.db
+
+# Prisma
+backend/.prisma/
+
+# IDE
+.vscode/
+.idea/
+.claude/
+*.swp
