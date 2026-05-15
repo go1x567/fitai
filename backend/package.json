@@ -7,7 +7,7 @@
     "dev": "tsx watch src/server.ts",
     "worker": "tsx watch src/workers/tryon.worker.ts",
     "build": "prisma generate",
-    "start": "prisma migrate deploy && tsx src/server.ts",
+    "start": "prisma migrate deploy && tsx prisma/seed.ts && tsx src/server.ts",
     "start:worker": "tsx src/workers/tryon.worker.ts",
     "postinstall": "prisma generate",
     "prisma:generate": "prisma generate",

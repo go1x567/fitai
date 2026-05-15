@@ -18,13 +18,14 @@ const CATALOG = [
 ];
 
 async function main() {
+  const existing = await prisma.catalogItem.count();
+  if (existing > 0) {
+    console.log(`Skip seed: ${existing} catalog items already present`);
+    return;
+  }
   for (const item of CATALOG) {
     const data = { ...item, priceCents: item.price * 100, currency: 'RUB' };
-    await prisma.catalogItem.upsert({
-      where: { id: item.id },
-      update: data,
-      create: data,
-    });
+    await prisma.catalogItem.create({ data });
   }
   console.log(`Seeded ${CATALOG.length} catalog items`);
 }
